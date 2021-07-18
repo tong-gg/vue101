@@ -1,6 +1,8 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
+    <!-- props sent from outside -->
+    <h2>{{ number }}</h2> 
     <p>
       For a guide and recipes on how to configure / customize this project,<br>
       check out the
@@ -34,13 +36,16 @@
 <script>
 export default {
   name: 'HelloWorld',
-  props: {
-    msg: String
+  props: { // this component accepts props
+    msg: String,
+    number: String
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
+<!-- scoped means every css style will be applied only in this component-->
+<!-- default lang: css -->
 <style scoped lang="scss">
 h3 {
   margin: 40px 0 0;
