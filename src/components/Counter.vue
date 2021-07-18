@@ -9,6 +9,9 @@
             <!-- <input type="text" v-bind:value="number" /> -->
             <button v-on:click="increase">+</button>
             <button v-on:click="decrease">-</button>    
+            <button v-on:click="addTen">+10</button>    
+            <button v-on:click="multiplyByTwo">x2</button>    
+            <button v-on:click="reset">reset</button>    
         </div>
     </div>
 </template>
@@ -26,6 +29,15 @@ export default {
         },
         decrease() {
             this.number--
+        },
+        addTen() {
+            this.number += 10
+        },
+        multiplyByTwo() {
+            this.number *= 2
+        },
+        reset() {
+            this.number = 0
         }
     }
 }
