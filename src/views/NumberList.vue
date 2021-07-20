@@ -1,7 +1,8 @@
 <template>
   <div>
-      <Counter></Counter>
-      <Counter></Counter>
+      <Counter init-number="0"></Counter>
+      <Counter init-number="100"></Counter>
+      <Counter init-number="-10"></Counter>
       <Counter></Counter>
   </div>
 </template>

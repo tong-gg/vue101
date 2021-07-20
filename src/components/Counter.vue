@@ -20,9 +20,10 @@
 export default {
     data() { // personal variable (these data, ONLY USE in component)
         return {
-            number: 10
+            number: this.initNumber || 10 // if this.initNumber == undefined ? 10 : this.initNumber
         }
     },
+    props: ['initNumber'],
     methods: {
         increase() {
             this.number++
