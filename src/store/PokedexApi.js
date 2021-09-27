@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import AuthService from '@/services/AuthService'
 
-let api_endpoint = process.env.POKEDEX_ENDPOINT || "http://localhost:1337" 
+let api_endpoint = process.env.VUE_APP_POKEDEX_ENDPOINT || "http://localhost:1337" 
 
 Vue.use(Vuex)
 
@@ -80,11 +81,35 @@ export default new Vuex.Store({
 
         console.log(`body`, body)
         
-        let res = await axios.post(url, body)
-        if (res.status === 200) {
-          commit('add', res.data) // push to state.data
-        } else {
-          console.error(res)
+        try{
+          let headers = AuthService.getApiHeader()
+          let res = await axios.post(url, body, headers)
+          if (res.status === 200) {
+            commit('add', res.data) // push to state.data
+            return {
+              success: true,
+              data: res.data
+            }
+          } else {
+            console.error(res)
+            return {
+              success: false,
+              message: "Unknown status code: " + res.status
+            }
+          }
+        } catch (e) {
+          if(e.response.status === 403){
+            console.error(e.response.data.message)
+            return {
+              success: false,
+              message: e.response.data.message
+            }
+          } else {
+            return {
+              success: false,
+              message: "Unknown error: " + e.response.data
+            }
+          }
         }
       },
 
